@@ -22,6 +22,10 @@ cc.Class({
         manaLabel: cc.Label,
         dameLabel: cc.Label,
         defLabel: cc.Label,
+
+        // bar
+        hpBar: cc.ProgressBar,
+        manaBar: cc.ProgressBar,
     },
 
     onLoad () {
@@ -36,10 +40,18 @@ cc.Class({
         this.dame = this._random(10, 20);
         this.defense = this._random(5, 15);
 
+        // init bar
+        this.updateBar();
+
         this.updateUI();
     },
 
     // update (dt) {},
+
+    updateBar(){
+        this.hpBar.progress = this.hp / 100;
+        this.manaBar.progress = this.mana / 50;
+    },
 
     move(dis) {
         let enemyPos = this.enemySpriteNode.position.clone();
@@ -119,6 +131,8 @@ cc.Class({
         this.manaLabel.string = "Mana: " + this.mana;
         this.dameLabel.string = "Dame: " + this.dame;
         this.defLabel.string = "Defense: " + this.defense;
+
+        this.updateBar();
     },
 
     isDead(){

@@ -119,6 +119,8 @@ cc.Class({
         this.manaLabel.string = "Mana: " + this.mana;
         this.dameLabel.string = "Dame: " + this.dame;
         this.defLabel.string = "Defense: " + this.defense;
+
+        this.player.updateUI();
     },
 
     _random(min, max) {
