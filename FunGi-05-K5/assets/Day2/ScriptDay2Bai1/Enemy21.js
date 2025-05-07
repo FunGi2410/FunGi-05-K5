@@ -7,6 +7,8 @@ cc.Class({
         dame: 0,
         defense: 0,
         mana: 50,
+
+        playerSpriteNode: cc.Node,
         
         playerNode: cc.Node,
         gameManagerNode: cc.Node,
@@ -55,9 +57,21 @@ cc.Class({
         this.gameManager.gameOverCheck();
     },
 
+    move(dis) {
+        let playerPos = this.playerSpriteNode.position.clone();
+        playerPos.x += dis;  // Đẩy lùi Enemy sang phải 50 đơn vị
+
+        // Cập nhật lại vị trí mới của Enemy
+        this.playerSpriteNode.setPosition(playerPos);
+    },
+
     onAttack(){
-        
         this.player.dameReceiver(this.dame);
+
+        this.move(-50);
+        this.scheduleOnce(() => {
+            this.move(50);
+        }, 0.2);
 
         this.gameManager.activeBnt(true);
     },
@@ -68,6 +82,11 @@ cc.Class({
             this.player.dameReceiver(this.dame * 2);
 
             this.updateUI();
+
+            this.move(-50);
+            this.scheduleOnce(() => {
+                this.move(50);
+            }, 0.2);
         }
 
         this.gameManager.activeBnt(true);

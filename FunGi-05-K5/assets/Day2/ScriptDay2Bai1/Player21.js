@@ -12,6 +12,8 @@ cc.Class({
         defense: 0,
         mana: 50,
 
+        enemySpriteNode: cc.Node,
+
         enemyMode: cc.Node,
         gameManagerNode: cc.Node,
 
@@ -39,26 +41,49 @@ cc.Class({
 
     // update (dt) {},
 
+    move(dis) {
+        let enemyPos = this.enemySpriteNode.position.clone();
+        enemyPos.x += dis;  // Đẩy lùi Enemy sang phải 50 đơn vị
+
+        // Cập nhật lại vị trí mới của Enemy
+        this.enemySpriteNode.setPosition(enemyPos);
+    },
+
+
     onAttack(){
-        
         this.enemy.dameReceiver(this.dame);
         this.gameManager.activeBnt(false);
 
-        // Enemy attack
-        this.enemy.onTurn();
+        this.move(50);
+        this.scheduleOnce(() => {
+            this.move(-50);
+        }, 0.2);
 
+        // Enemy attack
+        this.scheduleOnce(() => {
+            this.enemy.onTurn();
+        }, 1);
+        
         this.gameManager.gameOverCheck();
     },
 
     onSkill(){
         if(this.mana >= 30){
+            this.gameManager.activeBnt(false);
             this.mana -= 30;
             this.enemy.dameReceiver(this.dame * 2);
 
             this.updateUI();
 
+            this.move(50);
+            this.scheduleOnce(() => {
+                this.move(-50);
+            }, 0.2);
+
             // Enemy attack
-            this.enemy.onTurn();
+            this.scheduleOnce(() => {
+                this.enemy.onTurn();
+            }, 1);
 
             this.gameManager.gameOverCheck();
         }
@@ -66,12 +91,15 @@ cc.Class({
 
     onMana(){
         if(this.mana < 100){
+            this.gameManager.activeBnt(false);
             this.mana += 20;
             if(this.mana >= 100) this.mana = 100;
             this.updateUI();
 
             // Enemy attack
-            this.enemy.onTurn();
+            this.scheduleOnce(() => {
+                this.enemy.onTurn();
+            }, 1);
 
             this.gameManager.gameOverCheck();
         }
