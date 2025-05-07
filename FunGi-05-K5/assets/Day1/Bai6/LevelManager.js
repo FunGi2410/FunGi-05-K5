@@ -10,6 +10,7 @@ cc.Class({
     properties: {
         level: 1,
         levelText: cc.Label,
+        levelInput: cc.EditBox,
     },
 
 
@@ -22,6 +23,7 @@ cc.Class({
     // update (dt) {},
 
     onCheckLevel(){
+        this.level = this.levelInput.string * 1;
         if(this.level >= 1 && this.level <= 3) this.levelText.string = "Beginner";
         else if(this.level >= 4 && this.level <= 7) this.levelText.string = "Intermediate";
         else if(this.level >= 8 && this.level <= 10) this.levelText.string = "Expert";
