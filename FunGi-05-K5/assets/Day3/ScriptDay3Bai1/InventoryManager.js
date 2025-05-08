@@ -8,6 +8,7 @@ cc.Class({
         typeLabel: cc.Label,
         effectLabel: cc.Label,
         itemEquipLabel: cc.Label,
+        spriteItem: cc.Sprite,
 
         infoPanel: cc.Node,
 
@@ -54,10 +55,24 @@ cc.Class({
                 effect: "Heals 50 HP."
             },
             {
-                prefabIndex: 2,
-                name: "Cung",
-                quantity: 7,
+                prefabIndex: 1,
+                name: "Khiên",
+                quantity: 5,
                 type: "equipment",
+                effect: "A strong shield."
+            },
+            {
+                prefabIndex: 3,
+                name: "Bình máu",
+                quantity: 1,
+                type: "consumable",
+                effect: "Heals 50 HP."
+            },
+            {
+                prefabIndex: 4,
+                name: "Bình mana",
+                quantity: 20,
+                type: "consumable",
                 effect: "Heals 50 HP."
             },
 
@@ -122,6 +137,9 @@ cc.Class({
         this.infoPanel.active = true;
 
         this.itemNode = itemNode;
+
+        let spriteItem = this.itemNode.getComponent(cc.Sprite);
+        this.spriteItem.spriteFrame = spriteItem.spriteFrame;
     },
 
     removeItem(){
