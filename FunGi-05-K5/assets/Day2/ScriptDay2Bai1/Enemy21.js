@@ -68,9 +68,8 @@ cc.Class({
 
     move(dis) {
         let playerPos = this.playerSpriteNode.position.clone();
-        playerPos.x += dis;  // Đẩy lùi Enemy sang phải 50 đơn vị
-
-        // Cập nhật lại vị trí mới của Enemy
+        playerPos.x += dis;  
+       
         this.playerSpriteNode.setPosition(playerPos);
     },
 
