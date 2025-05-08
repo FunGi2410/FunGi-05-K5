@@ -40,9 +40,6 @@ cc.Class({
         this.dame = this._random(10, 20);
         this.defense = this._random(5, 15);
 
-        // init bar
-        this.updateBar();
-
         this.updateUI();
     },
 
@@ -50,7 +47,7 @@ cc.Class({
 
     updateBar(){
         this.hpBar.progress = this.hp / 100;
-        this.manaBar.progress = this.mana / 50;
+        this.manaBar.progress = this.mana / 100;
     },
 
     move(dis) {
@@ -124,6 +121,8 @@ cc.Class({
         this.hp -= dame;
         if(this.hp <= 0) this.hp = 0;
         this.hpLabel.string = "Hp: " + this.hp;
+
+        this.updateUI();
     },
 
     updateUI(){

@@ -18,6 +18,10 @@ cc.Class({
         manaLabel: cc.Label,
         dameLabel: cc.Label,
         defLabel: cc.Label,
+
+        // bar
+        hpBar: cc.ProgressBar,
+        manaBar: cc.ProgressBar,
     },
 
     onLoad () {
@@ -36,6 +40,11 @@ cc.Class({
     },
 
     // update (dt) {},
+
+    updateBar(){
+        this.hpBar.progress = this.hp / 100;
+        this.manaBar.progress = this.mana / 100;
+    },
 
     onTurn(){
         this.state = this._random(1, 3);
@@ -108,6 +117,8 @@ cc.Class({
         this.hp -= dame;
         if(this.hp <= 0) this.hp = 0;
         this.hpLabel.string = "Hp: " + this.hp;
+
+        this.updateUI();
     },
 
     isDead(){
@@ -120,7 +131,7 @@ cc.Class({
         this.dameLabel.string = "Dame: " + this.dame;
         this.defLabel.string = "Defense: " + this.defense;
 
-        this.player.updateUI();
+        this.updateBar();
     },
 
     _random(min, max) {
