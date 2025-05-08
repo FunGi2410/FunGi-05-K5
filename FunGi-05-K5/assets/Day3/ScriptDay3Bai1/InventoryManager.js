@@ -9,6 +9,7 @@ cc.Class({
         effectLabel: cc.Label,
         itemEquipLabel: cc.Label,
         spriteItem: cc.Sprite,
+        scrollView: cc.ScrollView,
 
         infoPanel: cc.Node,
 
@@ -146,4 +147,10 @@ cc.Class({
         this.itemNode.destroy();
         this.infoPanel.active = false;
     },
+
+    activeScroll(state){
+        let sv = this.scrollView.getComponent(cc.ScrollView);
+        sv.enabled = state;
+    }
+
 });

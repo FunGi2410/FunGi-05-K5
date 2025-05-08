@@ -12,6 +12,14 @@ cc.Class({
     },
 
     onLoad () {
+        this.dragNode = cc.Node;
+
+        // event drag and drop
+        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+
         let inventoryManagerNode = cc.find("InventoryManager");
         if (inventoryManagerNode) {
             this.inventoryManager = inventoryManagerNode.getComponent("InventoryManager");
@@ -34,5 +42,50 @@ cc.Class({
     },
 
     // update (dt) {},
+
+    onTouchStart(event) {
+        this.startPos = this.node.getPosition();
+       
+        this.dragNode = cc.instantiate(this.node);
+        this.dragNode.parent = cc.director.getScene(); // kéo ra khỏi scrollview
+
+        let worldPos = this.node.convertToWorldSpaceAR(cc.Vec2.ZERO);
+        let localPos = this.dragNode.parent.convertToNodeSpaceAR(worldPos);
+        this.dragNode.setPosition(localPos);
+
+        
+        this.dragNode.opacity = 180;
+        let bnt = this.dragNode.getComponent(cc.Button);
+        bnt.interactable = false;
+        this.inventoryManager.activeScroll(false);
+    },
+    
+    onTouchMove(event) {
+        if (!this.dragNode) return;
+
+        let delta = event.getDelta();
+        this.dragNode.x += delta.x;
+        this.dragNode.y += delta.y;
+    },
+    
+    onTouchEnd(event) {
+        if (!this.dragNode) return;
+
+        // destroy when collide slot
+        let slotZone = cc.find("Canvas/EquipZone");
+        let slotBox = slotZone.getBoundingBoxToWorld();
+        let itemBox = this.dragNode.getBoundingBoxToWorld();
+
+        if (slotBox.intersects(itemBox)) {
+           console.log("On slot");
+        } 
+        else {
+            this.dragNode.destroy();
+            this.dragNode = null;
+        }
+
+        
+        this.inventoryManager.activeScroll(true);
+    },
 });
 
