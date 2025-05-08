@@ -7,6 +7,7 @@ cc.Class({
         quantityLabel: cc.Label,
         typeLabel: cc.Label,
         effectLabel: cc.Label,
+        itemEquipLabel: cc.Label,
 
         infoPanel: cc.Node,
 
@@ -19,33 +20,33 @@ cc.Class({
     onLoad () {
         this.itemsData = [
             {
-                name: "Item 1",
-                quantity: 10,
-                type: "Weapon",
+                name: "Kiếm",
+                quantity: 1,
+                type: "equipment",
                 effect: "A powerful sword."
             },
             {
-                name: "Item 2",
+                name: "Khiên",
                 quantity: 5,
-                type: "Armor",
+                type: "equipment",
                 effect: "A strong shield."
             },
             {
-                name: "Item 3",
-                quantity: 20,
-                type: "Potion",
+                name: "Bình máu",
+                quantity: 1,
+                type: "consumable",
                 effect: "Heals 50 HP."
             },
             {
-                name: "Item 3",
+                name: "Bình mana",
                 quantity: 20,
-                type: "Potion",
+                type: "consumable",
                 effect: "Heals 50 HP."
             },
             {
-                name: "Item 3",
-                quantity: 20,
-                type: "Potion",
+                name: "Giày",
+                quantity: 7,
+                type: "equipment",
                 effect: "Heals 50 HP."
             },
 
@@ -71,13 +72,40 @@ cc.Class({
             }
         });
     },
-    
 
-    showInfoItem(name, quantity, type, effect, itemNode){
+    useItem(){
+        let item = this.itemNode.getComponent("Item");
+        if(item.type == "consumable"){
+            item.quantity--;
+            if(item.quantity <= 0)
+                this.removeItem();
+        }
+        else if(item.type == "equipment"){
+            this.removeItem();
+            this.itemEquipLabel.string = "Đã trang bị " + item.nameItem;
+
+            this.scheduleOnce(() => {
+                this.itemEquipLabel.node.active = true;
+            }, 0.2);
+
+            this.scheduleOnce(() => {
+                this.itemEquipLabel.node.active = false;
+            }, 3);
+        }
+
+        this.updateUI(item.nameItem, item.quantity, item.type, item.effect);
+    },
+
+    updateUI(name, quantity, type, effect){
         this.nameItemLabel.string = name;
         this.quantityLabel.string = quantity;
         this.typeLabel.string = type;
         this.effectLabel.string = effect;
+    },
+    
+
+    showInfoItem(name, quantity, type, effect, itemNode){
+        this.updateUI(name, quantity, type, effect);
 
         this.infoPanel.active = true;
 
