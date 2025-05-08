@@ -13,12 +13,12 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Item",
+    "_name": "Hp Item",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 1,
+    "_level": 2,
     "_components": [
       {
         "__id__": 2
@@ -43,8 +43,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40,
-      "height": 36
+      "width": 16,
+      "height": 16
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -53,15 +53,15 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -77,
-      "y": 0,
+      "x": -82,
+      "y": -33,
       "z": 0
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+      "x": 3.61419,
+      "y": 3.61419,
+      "z": 3.61419
     },
     "_eulerAngles": {
       "__type__": "cc.Vec3",
@@ -91,7 +91,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "8cdb44ac-a3f6-449f-b354-7cd48cf84061"
+      "__uuid__": "37894ff2-a6af-4c21-9ec0-26aea076093a"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -119,7 +119,7 @@
     "quantity": 0,
     "type": " ",
     "effect": " ",
-    "inventoryManagerNode": null,
+    "inventoryManager": null,
     "_id": ""
   },
   {
@@ -194,9 +194,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "eb7bed61-ebd3-49c0-967c-0f8d02438684"
+      "__id__": 0
     },
-    "fileId": "150FttLBVG+7kJ7oHfLurn",
+    "fileId": "68xR4cV+5C8qZi9JqHe6vy",
     "sync": false
   }
 ]

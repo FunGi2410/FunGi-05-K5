@@ -13,38 +13,49 @@ cc.Class({
 
         itemNode: cc.Node,
 
-        itemPrefab: cc.Prefab,
+        //itemPrefab: cc.Prefab,
+
+        itemPrefabs: {
+            default: [],
+            type: [cc.Prefab] 
+        },
+
         layoutItems: cc.Node,
     },
 
     onLoad () {
         this.itemsData = [
             {
+                prefabIndex: 0,
                 name: "Kiếm",
                 quantity: 1,
                 type: "equipment",
                 effect: "A powerful sword."
             },
             {
+                prefabIndex: 1,
                 name: "Khiên",
                 quantity: 5,
                 type: "equipment",
                 effect: "A strong shield."
             },
             {
+                prefabIndex: 3,
                 name: "Bình máu",
                 quantity: 1,
                 type: "consumable",
                 effect: "Heals 50 HP."
             },
             {
+                prefabIndex: 4,
                 name: "Bình mana",
                 quantity: 20,
                 type: "consumable",
                 effect: "Heals 50 HP."
             },
             {
-                name: "Giày",
+                prefabIndex: 2,
+                name: "Cung",
                 quantity: 7,
                 type: "equipment",
                 effect: "Heals 50 HP."
@@ -63,7 +74,8 @@ cc.Class({
 
     loadItems() {
         this.itemsData.forEach((item) => { 
-            let newItem = cc.instantiate(this.itemPrefab);
+            let itemPrefab = this.itemPrefabs[item.prefabIndex];
+            let newItem = cc.instantiate(itemPrefab);
             newItem.parent = this.layoutItems;
     
             let itemScript = newItem.getComponent("Item");
