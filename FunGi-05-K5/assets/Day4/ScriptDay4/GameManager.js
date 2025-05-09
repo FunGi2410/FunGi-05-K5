@@ -9,6 +9,8 @@ cc.Class({
         finalScoreLabel: cc.Label,
         pausePanel: cc.Node,
         pauseBntNode: cc.Node,
+
+        timeBar: cc.ProgressBar,
     },
 
     onLoad () {
@@ -23,6 +25,8 @@ cc.Class({
 
     start () {
         this.timerLabel.string = this.timer;
+        this.timeBar.progress = this.timer / 60;
+
         this.counterTime();
     },
 
@@ -51,6 +55,7 @@ cc.Class({
             }
             this.timer--;
             this.timerLabel.string = this.timer;
+            this.timeBar.progress = this.timer / 60;
             this.counterTime();
         }, 1);
     },
@@ -61,6 +66,7 @@ cc.Class({
         this.resultPanel.active = true;
         this.finalScoreLabel.string = this.totalScoreLabel.string;
         this.pauseBntNode.active = false;
+        this.timeBar.node.active = false;
     },
 
     onRestartGame(){
