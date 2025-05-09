@@ -22,7 +22,7 @@ cc.Class({
         this.score = this._randomInt(1, 10);
         this.scoreLabel.string = this.score;
 
-        let timeLife = this._randomFloat(1, 3);
+        let timeLife = this._randomFloat(1, 2);
         this.scheduleOnce(() => {
             this.onMiss();
         }, timeLife);

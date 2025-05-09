@@ -17,6 +17,13 @@ cc.Class({
         this.halfW = this.widthWinSize / 2;
         this.halfH = this.heightWinSize / 2;
 
+        let bubbleSize = this._getBubbleSize();
+        this.halfW = this.halfW - bubbleSize.width / 2;
+        this.halfH = this.halfH - bubbleSize.height / 2;
+
+        console.log("wb: " + this.halfW);
+        console.log("wh: " + this.halfH);
+
         this.node.on("bubble-clicked", this.onBubbleClicked, this);
     },
 
@@ -35,11 +42,18 @@ cc.Class({
         this.spawn();
     },
 
-    spawn(){
-        console.log(this.gameManager.isGameOverFunc());
-        if(this.gameManager.isGameOverFunc()) 
-            this.node.off("bubble-clicked", this.onBubbleClicked, this);
+    _getBubbleSize() {
+        let temp = cc.instantiate(this.bubblePref); 
+        let size = temp.getContentSize();         
+        temp.destroy();                           
+        return size;
+    },
 
+    spawn(){
+        if(this.gameManager.isGameOverFunc()) {
+            this.node.off("bubble-clicked", this.onBubbleClicked, this);
+            return;
+        }
         let newBubble = cc.instantiate(this.bubblePref);
 
         this._randomWinSize();
@@ -49,9 +63,13 @@ cc.Class({
     },
 
     _randomWinSize(){
-        this.x = (Math.random() * this.widthWinSize) - this.halfW;
-        this.y = (Math.random() * this.heightWinSize) - this.halfH;
+        this.x = this._randomFloat(-this.halfW, this.halfW);
+        this.y = this._randomFloat(-this.halfH, this.halfH);
     },
+
+    _randomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+    }
 
     // update (dt) {},
 });

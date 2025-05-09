@@ -7,14 +7,18 @@ cc.Class({
         timerLabel: cc.Label,
         resultPanel: cc.Node,
         finalScoreLabel: cc.Label,
+        pausePanel: cc.Node,
+        pauseBntNode: cc.Node,
     },
 
     onLoad () {
         this.resultPanel.active = false;
+        this.pausePanel.active = false;
 
         this.totalScore = 0;
-        this.timer = 5;
+        this.timer = 60;
         this.isGameOver = false;
+        this.isPauseGame = false;
     },
 
     start () {
@@ -38,7 +42,9 @@ cc.Class({
 
     counterTime(){
         this.scheduleOnce(() => {
-            if(this.timer <= 0){
+            if(this.timer <= 1){
+                this.timer--;
+                this.timerLabel.string = this.timer;
                 this.isGameOver = true;
                 this.updateGameOverUI();
                 return;
@@ -54,5 +60,24 @@ cc.Class({
         this.timerLabel.node.active = false;
         this.resultPanel.active = true;
         this.finalScoreLabel.string = this.totalScoreLabel.string;
+        this.pauseBntNode.active = false;
+    },
+
+    onRestartGame(){
+        // cc.director.loadScene(cc.director.getScene().name);
+        cc.director.loadScene("D4");
+        this.onResumeGame();
+    },
+
+    onPauseGame(){
+        this.isPauseGame = !this.isPauseGame;
+        this.pausePanel.active = this.isPauseGame;
+        if(this.isPauseGame)
+            cc.director.pause();
+        else this.onResumeGame();
+    },
+
+    onResumeGame(){
+        cc.director.resume();
     },
 });
