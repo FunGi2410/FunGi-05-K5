@@ -4,6 +4,9 @@ cc.Class({
 
     properties: {
         score: 1,
+
+        // Label
+        scoreLabel: cc.Label,
     },
 
     onLoad () {
@@ -16,18 +19,29 @@ cc.Class({
     },
 
     start () {
-        this.score = _randomInt(1, 10)
+        this.score = this._randomInt(1, 10);
+        this.scoreLabel.string = this.score;
+
         let timeLife = this._randomFloat(1, 3);
         this.scheduleOnce(() => {
-            this.onClick();
+            this.onMiss();
         }, timeLife);
     },
 
     // update (dt) {},
 
+    onMiss(){
+        let event = new cc.Event.EventCustom("bubble-clicked", true);
+        event.detail = { score: 0 };
+        this.node.dispatchEvent(event); 
+
+        this.node.destroy(); 
+    },
+
     onClick(){
         // call spawn func
         let event = new cc.Event.EventCustom("bubble-clicked", true);
+        event.detail = { score: this.score };
         this.node.dispatchEvent(event); 
 
         this.node.destroy(); 

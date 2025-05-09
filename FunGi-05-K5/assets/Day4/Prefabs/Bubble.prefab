@@ -177,7 +177,7 @@
     "asset": {
       "__uuid__": "ec4f090b-37c5-493d-bb92-69c771a6e651"
     },
-    "fileId": "d1n80WA/9Gub8b2fQ1WzxD",
+    "fileId": "bawokfJyFFQpn18UtzUV3W",
     "sync": false
   },
   {
@@ -286,6 +286,10 @@
       "__id__": 1
     },
     "_enabled": true,
+    "score": 1,
+    "scoreLabel": {
+      "__id__": 3
+    },
     "_id": ""
   },
   {
