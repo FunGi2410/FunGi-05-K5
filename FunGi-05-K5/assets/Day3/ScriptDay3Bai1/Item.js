@@ -44,6 +44,7 @@ cc.Class({
     // update (dt) {},
 
     onTouchStart(event) {
+        this.inventoryManager.showInfoItem(this.nameItem, this.quantity, this.type, this.effect, this.node);
         this.startPos = this.node.getPosition();
        
         this.dragNode = cc.instantiate(this.node);
@@ -77,13 +78,16 @@ cc.Class({
         let itemBox = this.dragNode.getBoundingBoxToWorld();
 
         if (slotBox.intersects(itemBox)) {
-           console.log("On slot");
+            if(this.type == "equipment")
+                this.inventoryManager.useItem();
+
+            this.dragNode.destroy();
+            this.dragNode = null;
         } 
         else {
             this.dragNode.destroy();
             this.dragNode = null;
         }
-
         
         this.inventoryManager.activeScroll(true);
     },
