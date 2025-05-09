@@ -15,8 +15,6 @@ cc.Class({
 
         itemNode: cc.Node,
 
-        //itemPrefab: cc.Prefab,
-
         itemPrefabs: {
             default: [],
             type: [cc.Prefab] 

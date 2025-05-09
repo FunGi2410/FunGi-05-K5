@@ -31,6 +31,13 @@ cc.Class({
         }, this);
     },
 
+    onDestroy(){
+        this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+        this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+    },
+
     initItem(name, quantity, type, effect){
         this.nameItem = name;
         this.quantity = quantity;
