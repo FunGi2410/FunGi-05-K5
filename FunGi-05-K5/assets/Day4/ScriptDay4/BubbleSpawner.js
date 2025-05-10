@@ -9,6 +9,9 @@ cc.Class({
     },
 
     onLoad () {
+        // enable physic 
+        cc.director.getPhysicsManager().enabled = true;
+
         this.gameManager = this.gameManagerNode.getComponent('GameManager');
 
         // get win size
@@ -20,15 +23,13 @@ cc.Class({
         let bubbleSize = this._getBubbleSize();
         this.halfW = this.halfW - bubbleSize.width / 2;
         this.halfH = this.halfH - bubbleSize.height / 2;
+        //this.halfH = this.halfH + bubbleSize.height;
 
-        console.log("wb: " + this.halfW);
-        console.log("wh: " + this.halfH);
-
-        this.node.on("bubble-clicked", this.onBubbleClicked, this);
+        this.node.on("BUBBLE_CLICK", this.onBubbleClicked, this);
     },
 
     onDestroy(){
-        this.node.off("bubble-clicked", this.onBubbleClicked, this);
+        this.node.off("BUBBLE_CLICK", this.onBubbleClicked, this);
     },
 
     start () {
@@ -51,7 +52,7 @@ cc.Class({
 
     spawn(){
         if(this.gameManager.isGameOverFunc()) {
-            this.node.off("bubble-clicked", this.onBubbleClicked, this);
+            this.node.off("BUBBLE_CLICK", this.onBubbleClicked, this);
             return;
         }
         let newBubble = cc.instantiate(this.bubblePref);
@@ -64,7 +65,8 @@ cc.Class({
 
     _randomWinSize(){
         this.x = this._randomFloat(-this.halfW, this.halfW);
-        this.y = this._randomFloat(-this.halfH, this.halfH);
+        //this.y = this._randomFloat(-this.halfH, this.halfH);
+        this.y = -this.halfH;
     },
 
     _randomFloat(min, max) {
