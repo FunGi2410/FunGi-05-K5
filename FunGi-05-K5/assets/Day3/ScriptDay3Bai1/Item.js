@@ -7,7 +7,6 @@ cc.Class({
         type: " ",
         effect: " ",
 
-        // inventoryManagerNode: cc.Node,
         inventoryManager: cc.Component,
     },
 
