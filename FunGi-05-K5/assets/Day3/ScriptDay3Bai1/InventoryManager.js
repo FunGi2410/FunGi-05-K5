@@ -21,6 +21,16 @@ cc.Class({
         },
 
         layoutItems: cc.Node,
+
+        // add item
+        addItemPanel: cc.Node,
+
+        inputName: cc.EditBox,
+        inputQuantity: cc.EditBox,
+        inputType: cc.EditBox,
+        inputEffect: cc.EditBox,
+
+        inputSearch: cc.EditBox,
     },
 
     onLoad () {
@@ -80,11 +90,74 @@ cc.Class({
 
     start () {
         this.infoPanel.active = false;
+        this.addItemPanel.active  = false;
 
         this.loadItems();
     },
 
     // update (dt) {},
+
+    searchItems() {
+        let key = this.inputSearch.string.trim().toLowerCase();
+
+        this.layoutItems.removeAllChildren();
+
+        let searchedItems = this.itemsData.filter(item =>
+            item.name.toLowerCase().includes(key)
+        );
+
+        searchedItems.forEach((item) => {
+            let itemPrefab = this.itemPrefabs[item.prefabIndex];
+            if (!itemPrefab) return;
+
+            let newItem = cc.instantiate(itemPrefab);
+            newItem.parent = this.layoutItems;
+
+            let itemScript = newItem.getComponent("Item");
+            if (itemScript) {
+                itemScript.initItem(item.name, item.quantity, item.type, item.effect);
+            }
+        });
+    },
+
+
+    activeAddItemForm(){
+        this.addItemPanel.active  = true;
+    },
+
+    addNewItem() {
+        let name = this.inputName.string.trim();
+        let quantity = parseInt(this.inputQuantity.string);
+        let type = this.inputType.string.trim().toLowerCase();
+        let effect = this.inputEffect.string.trim();
+
+        if (!name || isNaN(quantity) || !type || !effect) {
+            cc.log("Error input");
+            return;
+        }
+
+        let newItemData = {
+            prefabIndex: 0,
+            name: name,
+            quantity: quantity,
+            type: type,
+            effect: effect
+        };
+
+        this.itemsData.push(newItemData);
+
+        let itemPrefab = this.itemPrefabs[newItemData.prefabIndex];
+
+        let newItem = cc.instantiate(itemPrefab);
+        newItem.parent = this.layoutItems;
+
+        let itemScript = newItem.getComponent("Item");
+        if (itemScript) {
+            itemScript.initItem(name, quantity, type, effect);
+        }
+
+        this.addItemPanel.active = false; 
+    },
 
     loadItems() {
         this.itemsData.forEach((item) => { 
