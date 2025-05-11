@@ -11,6 +11,7 @@ cc.Class({
         pauseBntNode: cc.Node,
 
         timeBar: cc.ProgressBar,
+        maxTime: 0,
     },
 
     onLoad () {
@@ -18,14 +19,14 @@ cc.Class({
         this.pausePanel.active = false;
 
         this.totalScore = 0;
-        this.timer = 60;
+        this.timer = this.maxTime;
         this.isGameOver = false;
         this.isPauseGame = false;
     },
 
     start () {
         this.timerLabel.string = this.timer;
-        this.timeBar.progress = this.timer / 60;
+        this.timeBar.progress = this.timer / this.maxTime;
 
         this.counterTime();
     },
@@ -55,7 +56,7 @@ cc.Class({
             }
             this.timer--;
             this.timerLabel.string = this.timer;
-            this.timeBar.progress = this.timer / 60;
+            this.timeBar.progress = this.timer / this.maxTime;
             this.counterTime();
         }, 1);
     },
