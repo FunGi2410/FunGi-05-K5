@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Hp Item",
+    "_name": "Bow Item",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -53,8 +53,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -82,
-      "y": -33,
+      "x": -6,
+      "y": 33,
       "z": 0
     },
     "_scale": {
@@ -77,7 +77,7 @@
   },
   {
     "__type__": "cc.Sprite",
-    "_name": "",
+    "_name": "Bow Item<Sprite>",
     "_objFlags": 0,
     "node": {
       "__id__": 1
@@ -91,7 +91,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "37894ff2-a6af-4c21-9ec0-26aea076093a"
+      "__uuid__": "7787af4b-4471-4cdb-a02b-c4ff0752e59e"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -105,21 +105,6 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
-    "_id": ""
-  },
-  {
-    "__type__": "f02adfgWpxMgLSkJKyiFp1E",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "nameItem": " ",
-    "quantity": 0,
-    "type": " ",
-    "effect": " ",
-    "inventoryManager": null,
     "_id": ""
   },
   {
@@ -189,6 +174,19 @@
     "_id": ""
   },
   {
+    "__type__": "6c751rNscpN9pNQ0BCpyO22",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "nameItem": " ",
+    "price": 0,
+    "shopManager": null,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -196,7 +194,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "68xR4cV+5C8qZi9JqHe6vy",
+    "fileId": "88UtMHD8dHw4zZSqjhMS2R",
     "sync": false
   }
 ]
