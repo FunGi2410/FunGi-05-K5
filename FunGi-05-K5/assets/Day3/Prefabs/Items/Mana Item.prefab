@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Bow Item",
+    "_name": "Mana Item",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -54,7 +54,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -6,
-      "y": 33,
+      "y": -33,
       "z": 0
     },
     "_scale": {
@@ -91,7 +91,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "7787af4b-4471-4cdb-a02b-c4ff0752e59e"
+      "__uuid__": "0b8f4761-e0fa-4d38-8b46-2c0fd62866e6"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -194,9 +194,9 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "e2ccea6e-37c1-48d5-a4b1-4d99ad5380cc"
     },
-    "fileId": "52Ofzp5rRGublH+bLKc9+x",
+    "fileId": "6elxrOL8JA1ZItA/FzjPv3",
     "sync": false
   }
 ]
