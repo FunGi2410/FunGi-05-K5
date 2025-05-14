@@ -1,3 +1,13 @@
+/*
+    1. Quản lý hành vi nhân vật (Character Behavior)
+    2. Hành vi của AI
+    3. Xây dựng UI động (UI Builder)
+    4. Cutscene hoặc hoạt cảnh (Cutscene Scripting)
+    5. Xử lý animation sequence
+    6. Tạo các lệnh test/gameplay script dễ đọc
+    7. Xây dựng hệ thống cấu hình/setting
+*/
+
 
 cc.Class({
     extends: cc.Component,
