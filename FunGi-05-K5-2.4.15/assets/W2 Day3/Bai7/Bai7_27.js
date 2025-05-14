@@ -12,6 +12,7 @@ cc.Class({
 
     start () {
         const lazyMan = new LazyMan('jack', this.stateLabel);
+        
         lazyMan.eat('apple').sleep(5000).eat('hamburger').sleep(3000).eat('pear');
     },
 });
