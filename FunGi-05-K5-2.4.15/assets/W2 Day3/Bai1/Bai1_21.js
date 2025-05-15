@@ -6,15 +6,11 @@ cc.Class({
         timeLabel: cc.Label,
     },
 
-    // onLoad () {},
-
     async start () {
         const time = await getServerTime();
         const timeStr = new Date(time).toLocaleString();
         this.timeLabel.string = timeStr;
     },
-
-    // update (dt) {},
 });
 
 async function getServerTime() {
