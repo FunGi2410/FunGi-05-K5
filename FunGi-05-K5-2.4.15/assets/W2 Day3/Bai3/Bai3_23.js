@@ -18,6 +18,7 @@ cc.Class({
         for (let i = 0; i < urls.length; i++) {
             const url = urls[i];
             try {
+                // fetch img
                 console.log(`Downloading image ${i + 1}: ${url}`);
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`Failed to fetch ${url}`);
@@ -30,6 +31,7 @@ cc.Class({
                 texture.initWithElement(imageBitmap);
                 texture.handleLoadedTexture();
 
+                // set sprite
                 const spriteFrame = new cc.SpriteFrame(texture);
                 this.spriteNode.spriteFrame = spriteFrame;
                 console.log(`Image ${i + 1} downloaded (${(blob.size / 1024).toFixed(2)} KB)`);
