@@ -16,9 +16,29 @@ cc.Class({
                 .rotateTo(0, 1)          
                 .start();
         }
-        
     },
 });
+
+class Enemy {
+    constructor(node) {
+        this.node = node;
+        this.tween = cc.tween(node); 
+    }
+
+    moveTo(position, duration) {
+        this.tween = this.tween.to(duration, { position: position });
+        return this;
+    }
+
+    rotateTo(angle, duration) {
+        this.tween = this.tween.to(duration, { angle: angle });
+        return this;
+    }
+
+    start() {
+        this.tween.start(); 
+    }
+}
 
 // class Enemy {
 //     constructor(node) {
@@ -60,24 +80,3 @@ cc.Class({
 //         }
 //     }
 // }
-
-class Enemy {
-    constructor(node) {
-        this.node = node;
-        this.tween = cc.tween(node); 
-    }
-
-    moveTo(position, duration) {
-        this.tween = this.tween.to(duration, { position: position });
-        return this;
-    }
-
-    rotateTo(angle, duration) {
-        this.tween = this.tween.to(duration, { angle: angle });
-        return this;
-    }
-
-    start() {
-        this.tween.start(); 
-    }
-}

@@ -3,14 +3,16 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+      storeLabel: cc.Label,
     },
 
     onLoad () {
-        const store1 = new Store('store_1');
-        const store2 = new Store('store_2');
-        const store3 = new Store('store_3');
-        const store4 = new Store('store_4');
-        const store5 = new Store('store_5');
+      this.storeLabel.string = "";
+        const store1 = new Store('store_1', this.storeLabel);
+        const store2 = new Store('store_2', this.storeLabel);
+        const store3 = new Store('store_3', this.storeLabel);
+        const store4 = new Store('store_4', this.storeLabel);
+        const store5 = new Store('store_5', this.storeLabel);
 
         store1.wait(store3);
         store3.wait(store2);
@@ -34,7 +36,8 @@ cc.Class({
 });
 
 class Store {
-  constructor(name) {
+  constructor(name, storeLabel) {
+    this.storeLabel = storeLabel;
     this.name = name;
     this.depends = []; 
     this.isComplete = false;
@@ -51,6 +54,7 @@ class Store {
       }
     }
 
+    this.storeLabel.string += this.name + '\n';
     console.log(this.name);
     await new Promise(resolve => setTimeout(resolve, stepTime * 1000));
     this.isComplete = true;

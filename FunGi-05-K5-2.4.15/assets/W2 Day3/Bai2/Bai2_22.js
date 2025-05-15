@@ -3,16 +3,19 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        label: cc.Label,
     },
 
-    // onLoad () {},
-
     start() {
+        this.label.string = "";
+
         this.fetchWithAutoRetry(this.simulateAPICall, 3)
             .then(result => {
+                this.label.string += "Success" + result + '\n';
                 console.log('Success:', result);
             })
             .catch(error => {
+                this.label.string += "All retries failed:" + error.message + '\n';
                 console.error('All retries failed:', error.message)
             });
     },
@@ -26,6 +29,7 @@ cc.Class({
                 const result = await fetcher();
                 return result; 
             } catch (error) {
+                this.label.string += "Attempt " + attempt + " failed " + error.message + '\n';
                 console.warn(`Attempt ${attempt} failed: ${error.message}`);
                 lastError = error;
             }
